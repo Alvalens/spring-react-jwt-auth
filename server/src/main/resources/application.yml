@@ -1,0 +1,17 @@
+server:
+  port: 8443
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth_db
+    username: auth_user
+    password: auth_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+app:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    access-token-expiry: 900000   # 15 minutes in ms
