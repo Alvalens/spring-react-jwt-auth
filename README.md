@@ -7,7 +7,7 @@ Minimal full-stack JWT authentication system with access/refresh token strategy.
 - **Backend**: Spring Boot 3.5.2, Java 21, Gradle (Kotlin DSL)
 - **Auth**: JWT (jjwt) with access + refresh token rotation
 - **Database**: PostgreSQL 17
-- **Frontend**: React 19, Vite 7, Tailwind CSS v4, shadcn/ui, React Router 7
+- **Frontend**: React 19, Vite 7, Tailwind CSS v4, shadcn/ui, React Router 7, Zustand, Axios
 
 ## Prerequisites
 
@@ -52,19 +52,23 @@ pnpm dev
 
 Frontend runs at **http://localhost:5173**
 
-### 4. Test the API
+### 4. Try It
 
-Register a user:
+1. Go to **http://localhost:5173** — you'll be redirected to `/login`
+2. Click **Register** — create an account — you'll land on the dashboard
+3. Refresh the page — session persists (refresh token restores it)
+4. Click **Logout** — you're back at `/login`
+5. Log in with the same credentials — back on the dashboard
+
+### Testing via cURL
 
 ```bash
+# Register
 curl -X POST http://localhost:8443/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"test@test.com","password":"password123","firstName":"John","lastName":"Doe"}'
-```
 
-Login:
-
-```bash
+# Login
 curl -X POST http://localhost:8443/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"test@test.com","password":"password123"}'
@@ -78,6 +82,20 @@ curl -X POST http://localhost:8443/api/auth/login \
 | POST | `/api/auth/login` | No | Login with email/password |
 | POST | `/api/auth/refresh` | Cookie | Rotate refresh token, get new access token |
 | POST | `/api/auth/logout` | Cookie | Revoke refresh token |
+
+## Auth Flow
+
+```
+Register/Login → Backend returns access token (JSON) + refresh token (HttpOnly cookie)
+                          ↓
+              Access token stored in memory (JS variable, never localStorage)
+                          ↓
+              Axios interceptor attaches Bearer token to every request
+                          ↓
+              On 401 → interceptor calls /refresh → retries with new token
+                          ↓
+              On page refresh → initAuth() calls /refresh to restore session
+```
 
 ## Project Structure
 
@@ -108,8 +126,15 @@ spring-react-jwt-auth/
 │   ├── INITIAL_SETUP.md            # Frontend setup guide (learning resource)
 │   └── src/
 │       ├── index.css               # Tailwind + shadcn theme
-│       ├── App.tsx                 # Routes
-│       ├── components/ui/          # shadcn components
+│       ├── App.tsx                 # Routes + initAuth on mount
+│       ├── api/
+│       │   ├── axios.ts            # Axios instance + interceptors
+│       │   └── auth.ts             # API functions + TypeScript types
+│       ├── stores/
+│       │   └── authStore.ts        # Zustand auth state + actions
+│       ├── components/
+│       │   ├── ProtectedRoute.tsx   # Auth guard (redirects to /login)
+│       │   └── ui/                 # shadcn components
 │       ├── lib/utils.ts            # shadcn utility
 │       └── pages/                  # Login, Register, Dashboard, etc.
 ```
