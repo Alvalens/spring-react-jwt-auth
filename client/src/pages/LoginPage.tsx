@@ -93,26 +93,27 @@ export default function LoginPage() {
 
           <div className="space-y-6 max-w-md">
             <h1 className="text-4xl xl:text-5xl font-bold text-white leading-tight tracking-tight">
-              Secure by
+              JWT Auth
               <br />
-              <span className="text-amber-400">design.</span>
+              <span className="text-amber-400">with rotation.</span>
             </h1>
             <p className="text-white/40 text-base leading-relaxed">
-              JWT authentication with refresh token rotation, built on Spring
-              Boot and React. Production patterns, not a toy.
+              A full-stack authentication example using Spring Boot and React.
+              Implements JWT access tokens with automatic refresh token rotation
+              — the industry-standard pattern for secure, stateless auth.
             </p>
             <div className="flex gap-6 pt-2">
               <div>
-                <div className="text-2xl font-bold text-white/90">256-bit</div>
+                <div className="text-2xl font-bold text-white/90">15 min</div>
                 <div className="text-xs text-white/30 uppercase tracking-widest mt-1">
-                  Encryption
+                  Access token
                 </div>
               </div>
               <div className="w-px bg-white/10" />
               <div>
-                <div className="text-2xl font-bold text-white/90">15 min</div>
+                <div className="text-2xl font-bold text-white/90">7 days</div>
                 <div className="text-xs text-white/30 uppercase tracking-widest mt-1">
-                  Token TTL
+                  Refresh token
                 </div>
               </div>
               <div className="w-px bg-white/10" />

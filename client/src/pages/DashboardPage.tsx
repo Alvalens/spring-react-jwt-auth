@@ -89,60 +89,25 @@ export default function DashboardPage() {
           </div>
           <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6">
             <div className="text-xs text-white/30 uppercase tracking-widest mb-3">
-              Auth method
+              Access token
             </div>
-            <span className="text-white/80 font-medium">JWT + Refresh Token</span>
+            <span className="text-white/80 font-medium">In-memory (15 min)</span>
           </div>
           <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6">
             <div className="text-xs text-white/30 uppercase tracking-widest mb-3">
-              Token expires
+              Refresh token
             </div>
-            <span className="text-white/80 font-medium">Auto-refresh</span>
+            <span className="text-white/80 font-medium">HttpOnly cookie (7 days)</span>
           </div>
         </div>
 
-        {/* Main card */}
-        <div className="bg-white/[0.02] border border-white/5 rounded-xl overflow-hidden">
-          <div className="px-6 py-5 border-b border-white/5">
-            <h2 className="text-white font-semibold">Quick Start</h2>
-          </div>
-          <div className="p-6 space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-md bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-amber-400 text-sm font-bold">1</span>
-              </div>
-              <div>
-                <p className="text-white/80 font-medium">You're authenticated</p>
-                <p className="text-white/30 text-sm mt-0.5">
-                  Your access token is stored in memory, refresh token in an HttpOnly cookie.
-                </p>
-              </div>
-            </div>
-            <div className="border-t border-white/5" />
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-md bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-amber-400 text-sm font-bold">2</span>
-              </div>
-              <div>
-                <p className="text-white/80 font-medium">Try refreshing the page</p>
-                <p className="text-white/30 text-sm mt-0.5">
-                  Your session persists — the refresh token silently restores it on page load.
-                </p>
-              </div>
-            </div>
-            <div className="border-t border-white/5" />
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-md bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-amber-400 text-sm font-bold">3</span>
-              </div>
-              <div>
-                <p className="text-white/80 font-medium">Build on this</p>
-                <p className="text-white/30 text-sm mt-0.5">
-                  Add protected API endpoints, role-based access, or extend the user profile.
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Protected route notice */}
+        <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6">
+          <p className="text-white/50 text-sm">
+            This is a <span className="text-white/80">protected route</span>. If
+            you're seeing this, your JWT is valid. Try refreshing the page — your
+            session persists via refresh token rotation.
+          </p>
         </div>
       </div>
     </div>
