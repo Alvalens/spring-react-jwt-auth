@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { useAuthStore } from "@/stores/authStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +13,8 @@ import {
 } from "@/components/ui/card";
 
 export default function ProfilePage() {
+  const user = useAuthStore((s) => s.user);
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-2xl mx-auto space-y-6">
@@ -30,11 +33,15 @@ export default function ProfilePage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First name</Label>
-                <Input id="firstName" placeholder="John" disabled />
+                <Input
+                  id="firstName"
+                  value={user?.firstName ?? ""}
+                  disabled
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input id="lastName" placeholder="Doe" disabled />
+                <Input id="lastName" value="" disabled />
               </div>
             </div>
             <div className="space-y-2">
@@ -42,7 +49,7 @@ export default function ProfilePage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                value={user?.email ?? ""}
                 disabled
               />
             </div>

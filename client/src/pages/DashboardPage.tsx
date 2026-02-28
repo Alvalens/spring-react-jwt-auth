@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useAuthStore } from "@/stores/authStore";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,6 +10,14 @@ import {
 } from "@/components/ui/card";
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
+
+  async function handleLogout() {
+    await logout();
+    navigate("/login");
+  }
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -18,14 +27,16 @@ export default function DashboardPage() {
             <Button variant="outline" asChild>
               <Link to="/profile">Profile</Link>
             </Button>
-            <Button variant="destructive">Logout</Button>
+            <Button variant="destructive" onClick={handleLogout}>
+              Logout
+            </Button>
           </div>
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>Welcome back!</CardTitle>
+            <CardTitle>Welcome back, {user?.firstName}!</CardTitle>
             <CardDescription>
-              You are logged in. This is a protected page.
+              Logged in as {user?.email}
             </CardDescription>
           </CardHeader>
           <CardContent>
