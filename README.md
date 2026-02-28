@@ -1,6 +1,10 @@
 # Spring + React JWT Auth Template
 
-Minimal full-stack JWT authentication system with access/refresh token strategy.
+Production-ready JWT authentication scaffold with refresh token rotation. Clone it, swap in your business logic, and ship.
+
+Use this as a starting point for any full-stack app that needs auth — the boring (and easy to mess up) parts are already done: secure token storage, automatic refresh, route guards, breach detection, and logout.
+
+For a deep dive into how JWT auth works, see [`docs/JWT_GUIDE.md`](docs/JWT_GUIDE.md).
 
 ## Tech Stack
 
@@ -157,5 +161,6 @@ docker compose down -v
 
 ## Learning Resources
 
+- [`docs/JWT_GUIDE.md`](docs/JWT_GUIDE.md) — Complete JWT guide: how tokens work, sessions vs JWT, refresh token rotation, breach detection, and security considerations
 - [`server/INITIAL_SETUP.md`](server/INITIAL_SETUP.md) — Backend from-scratch guide (Spring Boot, JPA, Security, JWT)
 - [`client/INITIAL_SETUP.md`](client/INITIAL_SETUP.md) — Frontend from-scratch guide (Vite, Tailwind, shadcn, React Router)
